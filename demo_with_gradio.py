@@ -80,6 +80,8 @@ parser.add_argument(
     "--initial_model", type=str, default=initial_model, help="从哪个模型继续"
 )
 
+parser.add_argument('--other_dataset', dest='other_dataset', action='store_true', help='在其他数据集微调')
+
 train_start_time = datetime.datetime.now()
 ## 初始化、设置模型和打分文件保存路径
 warnings.simplefilter("ignore")  # 忽略警告
@@ -92,9 +94,12 @@ args = init_args(args)
 ##---------------------------demo 从这里开始---------------------------------##
 
 ## demo用参数
+'''
 args.initial_model = "epoch_79_acc_66.pth" # 这里放预训练的模型
 args.n_class = 1996  # 与训练用的cn-celeb2 speaker数量一致
-
+'''
+args.initial_model = "./model/epoch_40_acc_92.pth" # 这里放预训练的模型
+args.n_class = 50  # 与训练用的cn-celeb2 speaker数量一致
 
 ## load the model
 if gr.NO_RELOAD:  # 该部分仅初始化一次
